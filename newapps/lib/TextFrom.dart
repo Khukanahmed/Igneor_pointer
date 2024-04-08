@@ -36,21 +36,6 @@ class _RadioListTileExampleState extends State<RadioListTileExample> {
   ];
   bool ignorings = false;
   bool IgnoringDistruct = false;
-  void setIgnoring(
-    bool newValue1,
-  ) {
-    setState(() {
-      ignorings = newValue1;
-    });
-  }
-
-  void setIgnoringDistruct2(
-    bool newValue2,
-  ) {
-    setState(() {
-      IgnoringDistruct = newValue2;
-    });
-  }
 
   void clearTextField() {
     dateInput.clear();
@@ -80,7 +65,7 @@ class _RadioListTileExampleState extends State<RadioListTileExample> {
           child: Column(children: [
             Stack(alignment: Alignment.centerRight, children: [
               IgnorePointer(
-                ignoring: ignorings,
+                ignoring: dateInput.text != '',
                 child: TextFormField(
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   readOnly: true,
@@ -107,7 +92,7 @@ class _RadioListTileExampleState extends State<RadioListTileExample> {
                                 appBar: AppBar(
                                   toolbarHeight: 100,
                                   leadingWidth: 100,
-                                  backgroundColor: Green_color,
+                                  backgroundColor: Colors.green,
                                   leading: Padding(
                                       padding: EdgeInsets.only(top: 30),
                                       child: TextButton(
@@ -145,11 +130,8 @@ class _RadioListTileExampleState extends State<RadioListTileExample> {
                                                     dateInput.text =
                                                         division_list[index];
                                                     setState(() {
-                                                      dateInput.text = dateInput
-                                                              .text =
+                                                      dateInput.text =
                                                           division_list[index];
-
-                                                      setIgnoring(!ignorings);
                                                     });
                                                     //   print(divistion);
 
@@ -185,15 +167,13 @@ class _RadioListTileExampleState extends State<RadioListTileExample> {
                         setState(() {
                           clearTextField();
                           clearTextField2();
-                          setIgnoring(!ignorings);
-                         // setIgnoringDistruct2(!IgnoringDistruct);
                         });
                       },
                       icon: Icon(Icons.cancel))
             ]),
             Stack(alignment: Alignment.centerRight, children: [
               IgnorePointer(
-                ignoring: IgnoringDistruct,
+                ignoring: dateInput.text == '' || dateInput2.text != '',
                 child: TextFormField(
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   readOnly: true,
@@ -210,8 +190,6 @@ class _RadioListTileExampleState extends State<RadioListTileExample> {
                   onTap: () {
                     setState(
                       () {
-                        //  setIgnoring(
-                        //   !ignorings);
                         showModalBottomSheet(
                             isScrollControlled: true,
                             context: context,
@@ -220,7 +198,7 @@ class _RadioListTileExampleState extends State<RadioListTileExample> {
                                 appBar: AppBar(
                                   toolbarHeight: 100,
                                   leadingWidth: 100,
-                                  backgroundColor: Green_color,
+                                  backgroundColor: Colors.green,
                                   leading: Padding(
                                       padding: EdgeInsets.only(top: 30),
                                       child: TextButton(
@@ -255,15 +233,9 @@ class _RadioListTileExampleState extends State<RadioListTileExample> {
                                                     district_list[index],
                                                   ),
                                                   onTap: () {
-                                                    dateInput2.text =
-                                                        district_list[index];
                                                     setState(() {
-                                                      dateInput2
-                                                          .text = dateInput2
-                                                              .text =
+                                                      dateInput2.text =
                                                           district_list[index];
-                                                      setIgnoring(
-                                                          !IgnoringDistruct);
                                                     });
                                                     //   print(divistion);
 
@@ -298,7 +270,6 @@ class _RadioListTileExampleState extends State<RadioListTileExample> {
                       onPressed: () {
                         setState(() {});
                         clearTextField2();
-                         setIgnoringDistruct2(!IgnoringDistruct);
                       },
                       icon: Icon(Icons.cancel))
             ]),
